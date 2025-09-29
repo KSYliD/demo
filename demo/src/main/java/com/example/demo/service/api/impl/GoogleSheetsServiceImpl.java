@@ -1,6 +1,7 @@
-package com.example.demo.service.api;
+package com.example.demo.service.api.impl;
 
 import com.example.demo.model.Feedback;
+import com.example.demo.service.api.interfaces.GoogleSheetsService;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.sheets.v4.Sheets;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GoogleSheetsService {
+public class GoogleSheetsServiceImpl implements GoogleSheetsService {
     @Value("${google.spreadsheet.id}")
     private String spreadsheetId;
 

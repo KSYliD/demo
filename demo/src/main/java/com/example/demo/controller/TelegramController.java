@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.TelegramService;
+import com.example.demo.service.interfaces.TelegramService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

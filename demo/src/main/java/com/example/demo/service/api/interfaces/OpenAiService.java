@@ -1,4 +1,4 @@
-package com.example.demo.service.api;
+package com.example.demo.service.api.interfaces;
 
 import com.example.demo.dto.FeedbackAnalysis;
 

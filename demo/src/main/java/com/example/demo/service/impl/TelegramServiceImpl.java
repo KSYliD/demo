@@ -1,8 +1,10 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.UserProfile;
 import com.example.demo.repository.UserProfileRepository;
 import com.example.demo.repository.BranchRepository;
+import com.example.demo.service.interfaces.FeedbackService;
+import com.example.demo.service.interfaces.TelegramService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
-public class TelegramService {
+public class TelegramServiceImpl implements TelegramService {
 
     @Value("${telegram.bot.token}")
     private String botToken;

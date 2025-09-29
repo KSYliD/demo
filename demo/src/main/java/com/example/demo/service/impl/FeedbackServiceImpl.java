@@ -1,47 +1,38 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.dto.FeedbackAnalysis;
 import com.example.demo.model.Feedback;
 import com.example.demo.model.UserProfile;
 import com.example.demo.repository.FeedbackRepository;
-import com.example.demo.service.api.GoogleSheetsService;
-import com.example.demo.service.api.OpenAiService;
-import com.example.demo.service.api.TrelloService;
+import com.example.demo.service.api.interfaces.GoogleSheetsService;
+import com.example.demo.service.api.interfaces.OpenAiService;
+import com.example.demo.service.api.interfaces.TrelloService;
+import com.example.demo.service.interfaces.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 
-
 @Service
 @RequiredArgsConstructor
-public class FeedbackService {
+public class FeedbackServiceImpl implements FeedbackService {
 
     private final OpenAiService openAiService;
     private final FeedbackRepository feedbackRepository;
     private final GoogleSheetsService googleSheetsService;
     private final TrelloService trelloService;
 
-    // Старий метод, для внутрішнього використання
-    public void handleFeedback(String message) {
-        FeedbackAnalysis analysis = openAiService.analyzeFeedback(message);
-        System.out.println("Sentiment: " + analysis.getSentiment() +
-                ", Criticality: " + analysis.getCriticality());
-    }
-
-    // Новий метод з повним пайплайном
     public void handleNewFeedback(UserProfile userProfile, String message) {
         FeedbackAnalysis analysis = openAiService.analyzeFeedback(message);
 
         Feedback feedback = new Feedback();
         feedback.setUserProfile(userProfile);
         feedback.setText(message);
-        feedback.setSentiment(analysis.getSentiment()); // можна перетворити на ENUM
+        feedback.setSentiment(analysis.getSentiment());
         feedback.setCriticality(analysis.getCriticality());
-        feedback.setSuggestedSolution("TODO: запропонувати рішення користувачем або AI");
+        feedback.setSuggestedSolution(analysis.getSuggestedSolution());
 
         Feedback saved = feedbackRepository.save(feedback);
 
@@ -59,11 +50,6 @@ public class FeedbackService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("User: " + userProfile.getTelegramUserId() +
-                ", Sentiment: " + analysis.getSentiment() +
-                ", Criticality: " + analysis.getCriticality() +
-                ", Message: " + message);
     }
 
     public Page<Feedback> findFiltered(String branch, String position, String level, int page, int size) {

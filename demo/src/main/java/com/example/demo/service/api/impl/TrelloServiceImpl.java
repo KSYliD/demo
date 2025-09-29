@@ -1,6 +1,7 @@
-package com.example.demo.service.api;
+package com.example.demo.service.api.impl;
 
 import com.example.demo.model.Feedback;
+import com.example.demo.service.api.interfaces.TrelloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class TrelloService {
+public class TrelloServiceImpl implements TrelloService {
     @Value("${trello.key}")
     private String trelloKey;
 

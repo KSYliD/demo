@@ -1,8 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.dto.FeedbackDto;
 import com.example.demo.model.Feedback;
 import com.example.demo.repository.FeedbackRepository;
+import com.example.demo.service.interfaces.FeedbackFilterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FeedbackFilterService {
+public class FeedbackFilterServiceImpl implements FeedbackFilterService {
 
     private final FeedbackRepository feedbackRepository;
 

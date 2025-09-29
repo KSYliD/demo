@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.FeedbackDto;
-import com.example.demo.service.FeedbackFilterService;
+import com.example.demo.service.interfaces.FeedbackFilterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
